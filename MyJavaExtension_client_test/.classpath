@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/tools3/softInstalling/SFS2X_Android_Examples/Connector/source/SFS_Example_Connector/libs/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="D:/tools3/softInstalling/SFS2X_Android_Examples/Connector/source/SFS_Example_Connector/libs/netty-3.2.2.Final.jar"/>
+	<classpathentry kind="lib" path="D:/tools3/softInstalling/SFS2X_Android_Examples/Connector/source/SFS_Example_Connector/libs/SFS2X_API_Java.jar"/>
+	<classpathentry kind="lib" path="D:/tools3/softInstalling/SFS2X_Android_Examples/Connector/source/SFS_Example_Connector/libs/sfs2x-client-core.jar"/>
+	<classpathentry kind="lib" path="D:/tools3/softInstalling/SFS2X_Android_Examples/Connector/source/SFS_Example_Connector/libs/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/tools3/softInstalling/SFS2X_Android_Examples/Connector/source/SFS_Example_Connector/libs/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
