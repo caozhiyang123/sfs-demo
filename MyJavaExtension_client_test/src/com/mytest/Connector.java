@@ -49,7 +49,7 @@ public class Connector implements IEventListener {
 		Map params = event.getArguments();
 		if(SFSEvent.CONNECTION.equalsIgnoreCase(event.getType())){
 			if((Boolean)params.get("success")){
-				this.getSfs().send(new LoginRequest("michael","michael","BasicExamples"));
+				this.getSfs().send(new LoginRequest("Steve Wang","Steve Wang","BasicExamples"));
 			}else{
 				System.out.println("connection failed");
 			}
@@ -63,10 +63,17 @@ public class Connector implements IEventListener {
 			reqParams.putInt("n2", 16);
 			ExtensionRequest extensionRequest = new ExtensionRequest("add",reqParams);
 			this.getSfs().send(extensionRequest);
+			
+			SFSObject reqParams2 = new SFSObject();
+			reqParams2.putUtfString("name", "Steve Wang");
+			reqParams2.putUtfString("password", "Steve Wang");
+			ExtensionRequest extensionRequest2 = new ExtensionRequest("coins",reqParams2);
+			this.getSfs().send(extensionRequest2);
+			
 			User u = (User) event.getArguments().get("user");
 			System.out.println("login success:"+u);
 			
-			User user = sfs.getUserManager().getUserByName("michael");
+			User user = sfs.getUserManager().getUserByName("Steve Wang");
 			System.out.println(user);
 			  if(user.isGuest()){
 			   System.out.println("current user is guest");
@@ -80,11 +87,11 @@ public class Connector implements IEventListener {
 			
 		}else if(SFSEvent.LOGIN_ERROR.equalsIgnoreCase(event.getType())){
 			System.out.println("login fail");
-			
 		}else if(SFSEvent.EXTENSION_RESPONSE.equalsIgnoreCase(event.getType())){
 			SFSObject sfsObject = (SFSObject)event.getArguments().get("params");
-			System.out.println("the response is:"+sfsObject.getInt("sum"));
-			this.getSfs().send(new JoinRoomRequest("Room#1"));
+			System.out.println("the response-sum is:"+sfsObject.getInt("sum"));
+			System.out.println("the response-coins is:"+sfsObject.getUtfString("res"));
+			this.getSfs().send(new JoinRoomRequest("newMyRoom01"));
 			
 		}else if(SFSEvent.ROOM_JOIN.equalsIgnoreCase(event.getType())){
 			System.out.println("join room success");
@@ -92,7 +99,6 @@ public class Connector implements IEventListener {
 		}else if(SFSEvent.ROOM_JOIN_ERROR.equalsIgnoreCase(event.getType())){
 			System.out.println("join room fail");
 		}
-		
 	}
 	
 	public static void main(String[] args) {

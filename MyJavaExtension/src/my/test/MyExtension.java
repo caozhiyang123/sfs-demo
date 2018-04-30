@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.smartfoxserver.v2.SmartFoxServer;
+import com.smartfoxserver.v2.components.login.LoginAssistantComponent;
 import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.variables.RoomVariable;
@@ -20,17 +21,22 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
 public class MyExtension  extends SFSExtension{
 	
 	private SmartFoxServer smartFoxServer;
+	
+	private LoginAssistantComponent lac = null;
+	
+	public static final String DATABASE_ID = "dbID";
 
 	@Override
 	public void init() {
 		smartFoxServer = SmartFoxServer.getInstance();
 		trace("Hello Word! ... this is my first Extension");
-		addRequestHandler("add", AddRequestHandlder.class);
 		addEventHandler(SFSEventType.USER_LOGIN, LoginEventHandler.class);
-		User user = smartFoxServer.getUserManager().getUserByName("");
+		addRequestHandler("coins",LoginRequestHandler.class);
+		addRequestHandler("add", AddRequestHandlder.class);
+		/*User user = smartFoxServer.getUserManager().getUserByName("");
 		if(user.isSuperUser()){
 			trace("current user is superUser");
-		}
+		}*/
 		//TODO create room
 		/*CreateRoomSettings cfg = new CreateRoomSettings();
 		cfg.setName("myNewRoom");
