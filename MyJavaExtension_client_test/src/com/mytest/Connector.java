@@ -67,7 +67,7 @@ public class Connector implements IEventListener {
 			SFSObject reqParams2 = new SFSObject();
 			reqParams2.putUtfString("name", "Steve Wang");
 			reqParams2.putUtfString("password", "Steve Wang");
-			ExtensionRequest extensionRequest2 = new ExtensionRequest("coins",reqParams2);
+			ExtensionRequest extensionRequest2 = new ExtensionRequest("balance",reqParams2);
 			this.getSfs().send(extensionRequest2);
 			
 			User u = (User) event.getArguments().get("user");
@@ -90,9 +90,10 @@ public class Connector implements IEventListener {
 		}else if(SFSEvent.EXTENSION_RESPONSE.equalsIgnoreCase(event.getType())){
 			SFSObject sfsObject = (SFSObject)event.getArguments().get("params");
 			System.out.println("the response-sum is:"+sfsObject.getInt("sum"));
-			System.out.println("the response-coins is:"+sfsObject.getUtfString("res"));
-			this.getSfs().send(new JoinRoomRequest("newMyRoom01"));
-			
+			if(!"user is not available".equals(sfsObject.getUtfString("res"))) {
+				System.out.println("the response-coins is:"+sfsObject.getUtfString("res"));
+				this.getSfs().send(new JoinRoomRequest("newMyRoom01"));
+			}
 		}else if(SFSEvent.ROOM_JOIN.equalsIgnoreCase(event.getType())){
 			System.out.println("join room success");
 			

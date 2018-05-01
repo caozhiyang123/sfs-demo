@@ -9,10 +9,8 @@ import java.sql.SQLException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
-import com.smartfoxserver.bitswarm.sessions.ISession;
 import com.smartfoxserver.v2.db.IDBManager;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
@@ -22,25 +20,26 @@ import com.smartfoxserver.v2.exceptions.SFSErrorData;
 import com.smartfoxserver.v2.exceptions.SFSException;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
-public class LoginRequestHandler  extends BaseClientRequestHandler{
+public class TurnBalanceHandler extends BaseClientRequestHandler{
 
 	@Override
 	public void handleClientRequest(User player, ISFSObject params) {
+
 		String name = params.getUtfString("name");
 		String password = params.getUtfString("password");
 		
 		IDBManager dbManager = this.getParentExtension().getParentZone().getDBManager();
 		int id = conSql(name, password, dbManager);
-		SFSObject sfsObject = new SFSObject();
-		sfsObject.putUtfString("res", String.valueOf(id));
-		super.send("coins", sfsObject, player);
+//		SFSObject sfsObject = new SFSObject();
+//		sfsObject.putUtfString("res", String.valueOf(id));
+//		super.send("balance", sfsObject, player);
 		
 		/*ISession session = player.getSession();
 		 String dbId = String.valueOf(session.getProperty(MyExtension.DATABASE_ID));
 		 SFSObject obj2 = new SFSObject();
 		obj2.putUtfString("res",name);
 		super.send("coins", obj2, player);		*/
-		/*if(id!=0) {
+		if(id!=0) {
 			DBObject object = conMongo(String.valueOf(id));
 			if(object == null) {
 				SFSObject obj = new SFSObject();
@@ -53,10 +52,9 @@ public class LoginRequestHandler  extends BaseClientRequestHandler{
 					super.send("coins", obj2, player);				
 				}
 			}
-		}*/
-		
+		}
 	}
-
+	
 	private int conSql(String name, String password, IDBManager dbManager) {
 		Connection con = null;
 		PreparedStatement psp = null;
@@ -114,7 +112,7 @@ public class LoginRequestHandler  extends BaseClientRequestHandler{
 		return id;
 		
 	}
-
+	
 	private DBObject conMongo(String id) {
 		Mongo mongo = null;
 		try {

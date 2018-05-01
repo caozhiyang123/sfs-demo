@@ -31,8 +31,8 @@ public class MyExtension  extends SFSExtension{
 		smartFoxServer = SmartFoxServer.getInstance();
 		trace("Hello Word! ... this is my first Extension");
 		addEventHandler(SFSEventType.USER_LOGIN, LoginEventHandler.class);
-		addRequestHandler("coins",LoginRequestHandler.class);
 		addRequestHandler("add", AddRequestHandlder.class);
+		addRequestHandler("balance",TurnBalanceHandler.class);
 		/*User user = smartFoxServer.getUserManager().getUserByName("");
 		if(user.isSuperUser()){
 			trace("current user is superUser");
